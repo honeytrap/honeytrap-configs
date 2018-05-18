@@ -43,7 +43,7 @@ services:
     networks:
       - honeytrap
   honeytrap:
-    # image: kibana:latest
+    # image: honeytrap:latest
     image: honeytrap/honeytrap:latest
     ports:
       - "1339:1339"
