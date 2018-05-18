@@ -1,0 +1,24 @@
+[listener]
+type="agent"
+
+[[port]]
+port="tcp/22"
+services=["ssh-simulator"]
+
+[service.ssh-simulator]
+type="ssh-simulator"
+credentials=["root:root", "root:password"]
+
+[channel.console]
+type="console"
+
+[channel.elasticsearch]
+type="elasticsearch"
+url="http://elasticsearch:9200/honeytrap"
+
+[[filter]]
+channel=["consoel", "elasticsearch"]
+
+[[logging]]
+output="stdout"
+level="debug"
