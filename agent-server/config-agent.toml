@@ -17,7 +17,7 @@ type="elasticsearch"
 url="http://elasticsearch:9200/honeytrap"
 
 [[filter]]
-channel=["consoel", "elasticsearch"]
+channel=["console", "elasticsearch"]
 
 [[logging]]
 output="stdout"
