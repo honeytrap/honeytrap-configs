@@ -26,8 +26,6 @@ services:
         hard: 65536
     cap_add:
       - IPC_LOCK
-    #healthcheck:
-    #    test: ["CMD", "curl", "-f", "http://localhost:9200"]
     networks:
       - honeytrap
   kibana:
@@ -35,29 +33,12 @@ services:
     image: docker.elastic.co/kibana/kibana:5.6.4
     ports:
       - "127.0.0.1:5601:5601"
-    # volumes:
-      # - ./kibana.yml:/usr/share/kibana/config/kibana.yml
     environment:
       - XPACK_SECURITY_ENABLED=false
       # - ELASTICSEARCH_USER=elastic
       # - ELASTICSEARCH_PASSWORD=changeme
-  #  depends_on:
-  #      elasticsearch:
-  #          condition: service_healthy
     networks:
       - honeytrap
-  #honeytrap:
-  #  # image: honeytrap:latest
-  #  image: honeytrap/honeytrap:latest
-  #  ports:
-  #    - "1339:1339"
-  #  volumes:
-  #    - ./config-server.toml:/config/config.toml
-  #  depends_on:
-  #      elasticsearch:
-  #          condition: service_healthy
-  #  networks:
-  #    - honeytrap
 networks:
   honeytrap:
     external: true
