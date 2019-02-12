@@ -1,0 +1,34 @@
+[listener]
+type="socket"
+
+[service.ssh-simulator]
+type="ssh-simulator"
+credentials=["root:root", "root:password"]
+
+[[port]]
+ports=["tcp/8022", "tcp/8023"]
+services=["ssh-simulator"]
+
+[service.telnet]
+type="telnet"
+prompt=">>"
+# server-name="WS-3244"
+
+[[port]]
+port="tcp/5900"
+services=["telnet"]
+
+[channel.console]
+type="console"
+
+[channel.elasticsearch01]
+type="elasticsearch"
+url="http://localhost:9200/honeytrap"
+#insecure=true
+
+[[filter]]
+channel=["console", "elasticsearch01"]
+
+[[logging]]
+output = "stdout"
+level = "debug"
