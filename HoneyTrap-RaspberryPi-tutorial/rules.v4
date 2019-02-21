@@ -1,0 +1,7 @@
+*filter
+:INPUT ACCEPT [190159:269861645]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [76698:5366900]
+-A OUTPUT -p icmp -m icmp --icmp-type 3 -j DROP
+-A OUTPUT -p tcp -m tcp --tcp-flags RST RST -j DROP
+COMMIT

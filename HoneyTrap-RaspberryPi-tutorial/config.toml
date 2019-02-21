@@ -1,0 +1,25 @@
+# TODO Add listener/services/etc to config and check if everything works
+# TODO Add to the tutorial 
+[listener]
+interfaces=["eth0"]
+type="..."
+
+[channel.console]
+type="console"
+
+[channel....]
+type="..."
+token="..."
+server="..."
+
+
+[channel.file]
+type="file"
+filename="/var/log/honeytrap/honeytrap.log"
+
+[[filter]]
+channel=["..."]
+
+[[logging]]
+output = "stdout"
+level = "debug"
