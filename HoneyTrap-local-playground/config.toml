@@ -12,7 +12,6 @@ services=["ssh-simulator"]
 [service.telnet]
 type="telnet"
 prompt=">>"
-# server-name="WS-3244"
 
 [[port]]
 port="tcp/5900"
@@ -21,13 +20,12 @@ services=["telnet"]
 [channel.console]
 type="console"
 
-[channel.elasticsearch01]
+[channel.elasticsearch]
 type="elasticsearch"
-url="http://localhost:9200/honeytrap"
-#insecure=true
+url="http://elasticsearch:9200/honeytrap"
 
 [[filter]]
-channel=["console", "elasticsearch01"]
+channel=["console", "elasticsearch"]
 
 [[logging]]
 output = "stdout"
