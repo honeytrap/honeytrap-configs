@@ -1,9 +1,10 @@
 version: '3.2'
 
 services:
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.6.10
-    container_name: elasticsearch
+    container_name: ht-elasticsearch
     ports:
       - "127.0.0.1:9200:9200"
     volumes:
@@ -24,8 +25,10 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
     networks:
       - honeytrap
+
   kibana:
     image: docker.elastic.co/kibana/kibana:5.6.9
+    container_name: ht-kibana
     ports:
       - "127.0.0.1:5601:5601"
     environment:
@@ -34,6 +37,22 @@ services:
       - elasticsearch
     networks:
       - honeytrap
+
+  honeytrap:
+    image: honeytrap/honeytrap:latest
+    container_name: honeytrap
+    ports:
+      - "1339:1339"
+    volumes:
+      - ./config.toml:/config/config.toml
+    # Keep trying to start HoneyTrap. HoneyTrap will exit when Elastic is not ready.
+    # Healthcheck condition in depends_on has been deprecated after version 2.1
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+    networks:
+      - honeytrap
+
 networks:
   honeytrap:
     external: true
