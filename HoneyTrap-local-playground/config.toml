@@ -6,7 +6,7 @@ type="ssh-simulator"
 credentials=["root:root", "root:password"]
 
 [[port]]
-ports=["tcp/8022", "tcp/8023"]
+port="tcp/8022"
 services=["ssh-simulator"]
 
 [service.telnet]
