@@ -1,0 +1,33 @@
+[listener]
+interfaces=["eth0"]
+type="socket"
+
+[service.ssh-simulator]
+type="ssh-simulator"
+credentials=["root:root", "root:password"]
+
+[[port]]
+port="tcp/8022"
+services=["ssh-simulator"]
+
+[service.telnet]
+type="telnet"
+prompt=">>"
+
+[[port]]
+port="tcp/5900"
+services=["telnet"]
+
+[channel.console]
+type="console"
+
+[channel.file]
+type="file"
+filename="/var/log/honeytrap/honeytrap.log"
+
+[[filter]]
+channel=["console", "file"]
+
+[[logging]]
+output = "stdout"
+level = "debug"
